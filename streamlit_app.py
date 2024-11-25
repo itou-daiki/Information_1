@@ -26,12 +26,17 @@ if uploaded_file is not None:
     col_list_str = list(set(col_list) - set(col_list_num))
     col1 = st.selectbox('独立変数1', col_list_str)
     col2 = st.selectbox('独立変数2', col_list_str)
+    # 従属変数を選択（数値変数のみ候補に表示、複数選択可）
+    st.write('従属変数を選択してください。')
+    col_list_num = df._get_numeric_data().columns
+    col3 = st.multiselect('従属変数', col_list_num)
+    
     # 二元配置分散分析（主効果と交互作用効果の検定を含む）
     import statsmodels.api as sm
-
+    
     # 分散分析の結果を格納するデータフレームを作成
     anova_tables = []
-
+    
     for dv in col3:
         formula = f'{dv} ~ C({col1}) + C({col2}) + C({col1}):C({col2})'
         model = ols(formula, data=df).fit()
