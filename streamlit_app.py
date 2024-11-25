@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 from scipy import stats
+from statsmodels.formula.api import ols
 
 #Webアプリの説明
 st.title('二元配置分散分析')
@@ -47,12 +48,12 @@ if uploaded_file is not None:
     st.write(anova)
     #二元配置分散分析の結果の可視化
     st.write('## 可視化')
-    #箱ひげ図（有意水準に応じてブラケットとアノテーションを表示）
+    #箱ひげ図（有意水準に応じてブラケットとアノテーションヒゲの上に表示）
     #p<0.01の場合は**、p<0.05の場合は*、p<0.1の場合は†を表示
-    for i in col3:
-        fig = px.box(df, x=col1, y=i, color=col2, points='all')
-        fig.update_layout(title=i+'の箱ひげ図')
-        st.plotly_chart(fig)
+    #箱ひげ図の描画
+    fig = px.box(df, x=col1, y=col3, color=col2, points='all')
+    st.plotly_chart(fig)
+       
     
     #分散分析表
     st.write('## 分散分析表')
