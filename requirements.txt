@@ -1,0 +1,9 @@
+#必要な依存関係のインストール
+streamlit
+pandas
+plotly
+openpyxl
+numpy
+scipy
+scikit-learn
+
